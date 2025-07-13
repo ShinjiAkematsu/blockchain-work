@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ブロックチェーン学習コミュニティ</title>
+    <style>
+        :root {
+            --primary-color: #00aeff;
+            --background-color: #0a0a1a;
+            --text-color: #e0e0e0;
+            --card-bg-color: #1a1a2e;
+            --footer-bg-color: #000;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            text-align: center;
+            padding: 80px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header h1 {
+            font-size: 2.8em;
+            margin-bottom: 10px;
+            color: #ffffff;
+        }
+
+        header p {
+            font-size: 1.2em;
+            max-width: 600px;
+            margin: 0 auto 30px auto;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: #fff;
+            padding: 15px 35px;
+            font-size: 1.1em;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 174, 255, 0.3);
+        }
+
+        .cta-button:hover {
+            background-color: #0077b3;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 174, 255, 0.5);
+        }
+
+        section {
+            padding: 60px 20px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        section:nth-of-type(odd) {
+            background-color: rgba(26, 26, 46, 0.8);
+        }
+
+        h2 {
+            font-size: 2.2em;
+            margin-bottom: 40px;
+            color: #ffffff;
+        }
+
+        .features-grid, .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            text-align: left;
+        }
+
+        .feature-card, .benefit-card {
+            background-color: #2a2a3a;
+            padding: 30px;
+            border-radius: 10px;
+            border-left: 5px solid var(--primary-color);
+            backdrop-filter: blur(5px);
+        }
+
+        .feature-card h3, .benefit-card h3 {
+            font-size: 1.4em;
+            margin-top: 0;
+            color: #ffffff;
+        }
+
+        #join {
+            background-color: transparent;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            align-items: stretch;
+        }
+
+        .pricing-card {
+            background-color: var(--card-bg-color);
+            padding: 40px 30px;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            border: 2px solid #333;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .pricing-card.recommended {
+            border-color: var(--primary-color);
+        }
+
+        .recommended-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--primary-color);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+
+        .pricing-card h3 {
+            font-size: 1.6em;
+            color: #ffffff;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .price {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 25px;
+        }
+
+        .price span {
+            font-size: 0.5em;
+            font-weight: normal;
+            color: var(--text-color);
+        }
+
+        .pricing-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 30px 0;
+            text-align: left;
+            flex-grow: 1;
+        }
+
+        .pricing-card li {
+            margin-bottom: 12px;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .pricing-card li::before {
+            content: '✔';
+            color: var(--primary-color);
+            position: absolute;
+            left: 0;
+            font-size: 1.2em;
+        }
+
+        .pricing-card .cta-button {
+            margin-top: auto;
+        }
+
+        #book-promo {
+            background-color: rgba(10, 10, 26, 0.8);
+        }
+
+        .book-promo-content {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            text-align: left;
+        }
+
+        .book-cover img {
+            max-width: 250px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .book-details h3 {
+            font-size: 1.8em;
+            margin-top: 0;
+            color: #ffffff;
+        }
+
+        footer {
+            background-color: var(--footer-bg-color);
+            color: #aaa;
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+
+    <header>
+        <div class="container">
+            <h1>次世代の技術を学ぶ、ブロックチェーンコミュニティへようこそ</h1>
+            <p>Web3.0時代の最先端スキルを、仲間と共に学び、実践する場所。初心者から経験者まで、誰もが成長できる環境がここにあります。</p>
+            <a href="https://discord.gg/YOUR_INVITE_CODE" class="cta-button">今すぐDiscordに参加する</a>
+        </div>
+    </header>
+
+    <main>
+        <section id="features">
+            <div class="container">
+                <h2>コミュニティで学べること</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h3>スマートコントラクト開発</h3>
+                        <p>Solidityを使ったDApps開発の基礎から応用までを学び、自分だけのアプリケーションを構築します。</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>DeFi（分散型金融）</h3>
+                        <p>未来の金融システムであるDeFiの仕組みを理解し、最新のプロトコルやトレンドを追いかけます。</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>NFTとメタバース</h3>
+                        <p>デジタルアートからゲーム内アイテムまで、NFTの基本を学び、メタバースでの活用事例を探ります。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="benefits">
+            <div class="container">
+                <h2>参加するメリット</h2>
+                <div class="benefits-grid">
+                    <div class="benefit-card">
+                        <h3>専門家によるサポート</h3>
+                        <p>業界の第一線で活躍するエンジニアや専門家から、直接フィードバックやアドバイスを受けられます。</p>
+                    </div>
+                    <div class="benefit-card">
+                        <h3>仲間とのネットワーキング</h3>
+                        <p>同じ目標を持つ仲間と繋がり、情報交換や共同開発を通じて、モチベーションを高め合えます。</p>
+                    </div>
+                    <div class="benefit-card">
+                        <h3>実践的なプロジェクト</h3>
+                        <p>理論だけでなく、実際にチームを組んでプロダクトを開発。ポートフォリオに残る実績を作ります。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="pricing">
+            <div class="container">
+                <h2>料金プラン</h2>
+                <div class="pricing-grid">
+                    <div class="pricing-card">
+                        <h3>無料プラン</h3>
+                        <div class="price">¥0<span>/月</span></div>
+                        <ul>
+                            <li>コミュニティ参加</li>
+                            <li>基礎講座の閲覧</li>
+                            <li>イベントの参加</li>
+                        </ul>
+                        <a href="#" class="cta-button">無料で始める</a>
+                    </div>
+                    <div class="pricing-card recommended">
+                        <div class="recommended-badge">おすすめ</div>
+                        <h3>標準プラン</h3>
+                        <div class="price">¥980<span>/月</span></div>
+                        <ul>
+                            <li>コミュニティ参加</li>
+                            <li>基礎講座の閲覧</li>
+                            <li>イベントの参加</li>
+                            <li>応用講座の閲覧</li>
+                            <li>専門家への質問</li>
+                        </ul>
+                        <a href="#" class="cta-button">標準プランを始める</a>
+                    </div>
+                    <div class="pricing-card">
+                        <h3>プレミアムプラン</h3>
+                        <div class="price">¥2,980<span>/月</span></div>
+                        <ul>
+                            <li>コミュニティ参加</li>
+                            <li>基礎講座の閲覧</li>
+                            <li>イベントの参加</li>
+                            <li>応用講座の閲覧</li>
+                            <li>専門家への質問</li>
+                            <li>個別メンタリング</li>
+                        </ul>
+                        <a href="#" class="cta-button">プレミアムプランを始める</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="book-promo">
+            <div class="container">
+                <h2>執筆者による書籍紹介</h2>
+                <div class="book-promo-content">
+                    <div class="book-cover">
+                        <img src="1123101153-520x.jpg" alt="書籍「ブロックチェーンの未来」">
+                    </div>
+                    <div class="book-details">
+                        <h3>「1週間でブロックチェーンの基礎が学べる本」</h3>
+                        <p>著者：明松 真司 / 監修：佐藤 研一朗</p>
+                        <p>ブロックチェーンを学ぶはじめの一歩に最適な一冊。ビットコインをはじめとする技術的な基礎知識が、この一冊でしっかりと深まります。コミュニティと合わせて学ぶことで、より実践的なスキルが身につきます。</p>
+                        <a href="#" class="cta-button">Amazonで購入</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="join">
+            <div class="container">
+                <h2>今すぐコミュニティに参加しよう</h2>
+                <p>参加はとても簡単。下のボタンからDiscordサーバーに参加して、自己紹介チャンネルに投稿するだけ！</p>
+                <a href="https://discord.gg/YOUR_INVITE_CODE" class="cta-button">Discordに参加して学習を始める</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 ブロックチェーン学習コミュニティ. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script>
+        particlesJS("particles-js", {
+            "particles": {
+                "number": {
+                    "value": 80,
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
+                    }
+                },
+                "color": {
+                    "value": "#ffffff"
+                },
+                "shape": {
+                    "type": "circle",
+                    "stroke": {
+                        "width": 0,
+                        "color": "#000000"
+                    },
+                    "polygon": {
+                        "nb_sides": 5
+                    }
+                },
+                "opacity": {
+                    "value": 0.5,
+                    "random": false,
+                    "anim": {
+                        "enable": false,
+                        "speed": 1,
+                        "opacity_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "size": {
+                    "value": 3,
+                    "random": true,
+                    "anim": {
+                        "enable": false,
+                        "speed": 40,
+                        "size_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#ffffff",
+                    "opacity": 0.4,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 6,
+                    "direction": "none",
+                    "random": false,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false,
+                    "attract": {
+                        "enable": false,
+                        "rotateX": 600,
+                        "rotateY": 1200
+                    }
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "repulse"
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push"
+                    },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": {
+                        "distance": 400,
+                        "line_linked": {
+                            "opacity": 1
+                        }
+                    },
+                    "bubble": {
+                        "distance": 400,
+                        "size": 40,
+                        "duration": 2,
+                        "opacity": 8,
+                        "speed": 3
+                    },
+                    "repulse": {
+                        "distance": 200,
+                        "duration": 0.4
+                    },
+                    "push": {
+                        "particles_nb": 4
+                    },
+                    "remove": {
+                        "particles_nb": 2
+                    }
+                }
+            },
+            "retina_detect": true
+        });
+    </script>
+</body>
+</html>
