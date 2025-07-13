@@ -3,34 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <title>PolarTechブロックチェーン</title>
     <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         :root {
-            --primary-color: #00aeff;
-            --background-color: #0a0a1a;
+            --primary-color: #00e5ff;
+            --background-color: #020024;
             --text-color: #e0e0e0;
-            --card-bg-color: #1a1a2e;
+            --card-bg-color: rgba(26, 26, 46, 0.6);
             --footer-bg-color: #000;
+            --glow-color: rgba(0, 229, 255, 0.8);
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: var(--background-color);
+            background: linear-gradient(180deg, #020024 0%, #090979 35%, #002b36 100%);
             color: var(--text-color);
             line-height: 1.6;
         }
 
+        h1, h2, h3 {
+            font-family: 'Orbitron', sans-serif;
+        }
+
         #particles-js {
-            position: absolute;
+            position: fixed;
             width: 100%;
             height: 100%;
             z-index: 0;
         }
 
         .container {
-            max-width: 960px;
+            max-width: 1100px;
             margin: 0 auto;
             padding: 20px;
             position: relative;
@@ -39,76 +52,86 @@
 
         header {
             text-align: center;
-            padding: 80px 20px;
+            padding: 120px 20px;
             position: relative;
             overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         header h1 {
-            font-size: 2.8em;
-            margin-bottom: 10px;
+            font-size: 4em;
+            margin-bottom: 20px;
             color: #ffffff;
+            text-shadow: 0 0 15px var(--glow-color);
         }
 
         header p {
-            font-size: 1.2em;
-            max-width: 600px;
-            margin: 0 auto 30px auto;
+            font-size: 1.3em;
+            max-width: 700px;
+            margin: 0 auto 40px auto;
         }
 
         .cta-button {
             display: inline-block;
-            background-color: var(--primary-color);
+            background: linear-gradient(45deg, var(--primary-color), #0077b3);
             color: #fff;
-            padding: 15px 35px;
-            font-size: 1.1em;
+            padding: 18px 40px;
+            font-size: 1.2em;
             font-weight: bold;
             text-decoration: none;
             border-radius: 50px;
-            transition: transform 0.3s ease, background-color 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 174, 255, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none;
+            box-shadow: 0 0 20px var(--glow-color);
         }
 
         .cta-button:hover {
-            background-color: #0077b3;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0, 174, 255, 0.5);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 0 35px var(--glow-color);
         }
 
         section {
-            padding: 60px 20px;
+            padding: 80px 20px;
             text-align: center;
             position: relative;
             z-index: 1;
+            opacity: 0;
+            animation: fadeIn 1s forwards;
         }
         
-        section:nth-of-type(odd) {
-            background-color: rgba(26, 26, 46, 0.8);
+        .feature-card, .benefit-card, .pricing-card, .book-promo-content {
+            background-color: var(--card-bg-color);
+            padding: 40px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
         }
 
         h2 {
-            font-size: 2.2em;
-            margin-bottom: 40px;
+            font-size: 2.8em;
+            margin-bottom: 60px;
             color: #ffffff;
+            text-shadow: 0 0 10px var(--glow-color);
         }
 
-        .features-grid, .benefits-grid {
+        .features-grid, .benefits-grid, .pricing-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
             text-align: left;
         }
 
         .feature-card, .benefit-card {
-            background-color: #2a2a3a;
-            padding: 30px;
-            border-radius: 10px;
             border-left: 5px solid var(--primary-color);
-            backdrop-filter: blur(5px);
         }
 
-        .feature-card h3, .benefit-card h3 {
-            font-size: 1.4em;
+        .feature-card h3, .benefit-card h3, .pricing-card h3 {
+            font-size: 1.6em;
             margin-top: 0;
             color: #ffffff;
         }
@@ -117,55 +140,38 @@
             background-color: transparent;
         }
 
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            align-items: stretch;
-        }
-
         .pricing-card {
-            background-color: var(--card-bg-color);
-            padding: 40px 30px;
-            border-radius: 10px;
             display: flex;
             flex-direction: column;
             position: relative;
-            border: 2px solid #333;
             transition: transform 0.3s ease, border-color 0.3s ease;
-            backdrop-filter: blur(5px);
+            border: 2px solid transparent;
         }
         
         .pricing-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-10px);
         }
 
         .pricing-card.recommended {
             border-color: var(--primary-color);
+            box-shadow: 0 0 25px var(--glow-color);
         }
 
         .recommended-badge {
             position: absolute;
-            top: -15px;
+            top: -18px;
             left: 50%;
             transform: translateX(-50%);
             background-color: var(--primary-color);
-            color: white;
-            padding: 5px 15px;
+            color: #000;
+            padding: 7px 20px;
             border-radius: 20px;
             font-size: 0.9em;
             font-weight: bold;
         }
 
-        .pricing-card h3 {
-            font-size: 1.6em;
-            color: #ffffff;
-            margin-top: 0;
-            margin-bottom: 15px;
-        }
-
         .price {
-            font-size: 2.5em;
+            font-size: 3em;
             font-weight: bold;
             color: var(--primary-color);
             margin-bottom: 25px;
@@ -204,7 +210,7 @@
         }
 
         #book-promo {
-            background-color: rgba(10, 10, 26, 0.8);
+            background-color: transparent;
         }
 
         .book-promo-content {
@@ -231,6 +237,8 @@
             color: #aaa;
             text-align: center;
             padding: 20px;
+            position: relative;
+            z-index: 1;
         }
     </style>
 </head>
@@ -468,6 +476,22 @@
                 }
             },
             "retina_detect": true
+        });
+
+        const sections = document.querySelectorAll('section');
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeIn 1s forwards';
+                } else {
+                    entry.target.style.animation = 'none';
+                    entry.target.style.opacity = '0';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        sections.forEach(section => {
+            observer.observe(section);
         });
     </script>
 </body>
